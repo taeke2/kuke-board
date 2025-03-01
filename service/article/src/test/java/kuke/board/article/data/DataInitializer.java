@@ -20,7 +20,7 @@ public class DataInitializer {
     @Autowired
     TransactionTemplate transactionTemplate;
     Snowflake snowflake = new Snowflake();
-    CountDownLatch letch = new CountDownLatch(EXECUTE_COUNT);
+    CountDownLatch latch = new CountDownLatch(EXECUTE_COUNT);
 
     static final int BULK_INSERT_COUNT = 2000;
     static final int EXECUTE_COUNT = 6000;
@@ -31,11 +31,11 @@ public class DataInitializer {
         for (int i = 0; i < EXECUTE_COUNT; i++) {
             executorService.submit(() -> {
                 insert();
-                letch.countDown();
-                System.out.println("letch.getCount() = " + letch.getCount());
+                latch.countDown();
+                System.out.println("letch.getCount() = " + latch.getCount());
             });
         }
-        letch.await();
+        latch.await();
         executorService.shutdown();
     }
 
