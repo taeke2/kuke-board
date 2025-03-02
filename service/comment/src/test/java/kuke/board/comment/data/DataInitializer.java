@@ -1,8 +1,8 @@
-package kuke.board.article.data;
+package kuke.board.comment.data;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kuke.board.article.entity.Article;
+import kuke.board.comment.entity.Comment;
 import kuke.board.common.snowflake.Snowflake;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,15 +41,17 @@ public class DataInitializer {
 
     void insert() {
         transactionTemplate.executeWithoutResult(status -> {
+            Comment prev = null;
             for (int i = 0; i < BULK_INSERT_COUNT; i++) {
-                Article article = Article.create(
+                Comment comment = Comment.create(
                         snowflake.nextId(),
-                        "title" + i,
-                        "content" + i,
+                        "content",
+                        i % 2 == 0 ? null : prev.getCommentId(),
                         1L,
                         1L
                 );
-                em.persist(article);
+                prev = comment;
+                em.persist(comment);
             }
         });
     }
