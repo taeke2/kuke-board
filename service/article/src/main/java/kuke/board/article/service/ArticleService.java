@@ -31,7 +31,7 @@ public class ArticleService {
         int result = boardArticleCountRepository.increase(article.getBoardId());
         if (result == 0) {
             boardArticleCountRepository.save(
-                    BoardArticleCount.init(article.getBoardId(), 0L)
+                    BoardArticleCount.init(article.getBoardId(), 1L)
             );
         }
         return ArticleResponse.from(article);
