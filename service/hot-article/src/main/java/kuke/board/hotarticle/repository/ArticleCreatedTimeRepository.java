@@ -12,7 +12,7 @@ import java.time.ZoneOffset;
 /**
  * 이벤트가 왔는데, 이 이벤트에 대한 게시글이 오늘 게시글인지 확인하려면 게시글 서비스에 조회가 필요하다.
  * 하지만 게시글 생성 시간을 저장하고 있으면, 오늘 게시글인지 확인하기 위해 게시글 서비스에 호출을 안해도 된다.
- * 그래서 ArticleCreatedTimeRepository가 필요하다.
+ * 그래서 ArticleCreatedTimeRepository 가 필요하다.
  */
 
 @Repository
