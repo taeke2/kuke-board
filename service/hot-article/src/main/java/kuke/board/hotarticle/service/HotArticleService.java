@@ -25,7 +25,6 @@ public class HotArticleService {
 
     public void handleEvent(Event<EventPayload> event) {
         EventHandler<EventPayload> eventHandler = findEventHandler(event);
-
         if (eventHandler == null) {
             return;
         }

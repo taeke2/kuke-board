@@ -29,14 +29,14 @@ public class HotArticleListRepository {
             StringRedisConnection conn = (StringRedisConnection) action;
             String key = generateKey(time); // redis의 key 생성
             conn.zAdd(key, score, String.valueOf(articleId));   // sortedSet을 사용하면 앞에 z가 붙는다.
-            conn.zRemRange(key, 0, -limit - 1); // 상위 10건만 남도록 업데이트 해주는 것 (limit 만큼 상위에 sortedSet에서 저장한다.(?))
+            conn.zRemRange(key, 0, - limit - 1); // 상위 10건만 남도록 업데이트 해주는 것 (limit 만큼 상위에 sortedSet에서 저장한다.(?))
             conn.expire(key, ttl.toSeconds());  // 만료 시간 설정
             return null;
         });
     }
 
     public void remove(Long articleId, LocalDateTime time) {
-        redisTemplate.opsForZSet().remove(generateKey((time)), String.valueOf(articleId));
+        redisTemplate.opsForZSet().remove(generateKey(time), String.valueOf(articleId));
     }
 
     private String generateKey(LocalDateTime time) {

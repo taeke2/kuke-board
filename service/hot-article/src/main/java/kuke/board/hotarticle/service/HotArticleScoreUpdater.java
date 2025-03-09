@@ -26,7 +26,7 @@ public class HotArticleScoreUpdater {
         Long articleId = eventHandler.findArticleId(event);
         LocalDateTime createdTime = articleCreatedTimeRepository.read(articleId);
 
-        if (!isArticleCreateToday(createdTime)) {
+        if (!isArticleCreatedToday(createdTime)) {
             return;
         }
 
@@ -42,7 +42,7 @@ public class HotArticleScoreUpdater {
         );
     }
 
-    private boolean isArticleCreateToday(LocalDateTime createdTime) {
+    private boolean isArticleCreatedToday(LocalDateTime createdTime) {
         return createdTime != null && createdTime.toLocalDate().equals(LocalDate.now());
     }
 }

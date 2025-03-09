@@ -23,7 +23,7 @@ public class ArticleCommentCountRepository {
         return result == null ? 0L : Long.valueOf(result);
     }
 
-    private String generateKey(long articleId) {
+    private String generateKey(Long articleId) {
         return KEY_FORMAT.formatted(articleId);
     }
 }
